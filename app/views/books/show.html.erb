@@ -42,12 +42,14 @@
 
       </table>
 
+      <table>
+        <tbody>
+
     <% @book.book_comments.each do |book_comment| %>
 
-    <table>
 　　　<tr>
 
-　　　　<td><%= link_to user_path(@user.id) do %>
+　　　　<td><%= link_to user_path(book_comment.user) do %>
 　　　　  <%= image_tag book_comment.user.get_profile_image %><br>
 　　　　  <%= book_comment.user.name %>
 　　　　  <% end %>
@@ -60,20 +62,23 @@
 　　　　  <% if book_comment.user == current_user %>
 
 　　　　<td>
-　　　　  <%= link_to 'Destroy', book_book_comment_path(book_comment.book, book_comment), class: "btn btn-sm btn-danger", method: :delete %>
+　　　　  <%= link_to 'Destroy', book_book_comment_path(book_comment.book, book_comment), class: "btn btn-sm btn-danrge pull-right", method: :delete %>
 　　　　</td>
 
 　　　　  <% end %>
 
 　　　　</tr>
-　　　　</table>
 
-        <% end %>
+　　　　<% end %>
+
+　　　　</tbody>
+
+　　　　</table>
 
       <div>
       <%= form_with model:[@book, @book_comment] do |f| %>
       <div>
-      <%= f.text_area :comment %>
+      <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに", class: "w-100" %>
       </div>
       <div>
       <%= f.submit "送信" %>
