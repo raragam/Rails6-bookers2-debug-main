@@ -1,7 +1,7 @@
 <table>
   <tbody>
 
-    <% @book.book_comments.each do |book_comment| %>
+    <% book.book_comments.each do |book_comment| %>
 
 　　　<tr>
 
@@ -18,7 +18,7 @@
 　　　　  <% if book_comment.user == current_user %>
 
 　　　　<td>
-　　　　  <%= link_to 'Destroy', book_book_comment_path(book_comment.book, book_comment), class: "btn btn-danger pull-right", method: :delete %>
+　　　　  <%= link_to 'Destroy', book_book_comment_path(book_comment.book, book_comment), class: "btn btn-danger pull-right", method: :delete, remote: true %>
 　　　　</td>
 
 　　　　  <% end %>
