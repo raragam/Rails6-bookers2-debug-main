@@ -13,7 +13,7 @@ class BookCommentsController < ApplicationController
     if @comment.save
     render :book_comments
     else
-    render 'books/show'
+    render :book_comments
     end
   end
 
