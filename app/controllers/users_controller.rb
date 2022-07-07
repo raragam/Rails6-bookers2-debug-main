@@ -1,23 +1,19 @@
 class UsersController < ApplicationController
   before_action :ensure_correct_user, only: [:update]
 
-  def show
-    @user = User.find(params[:id])
-    @books = @user.books
-    @book = Book.new
-    @books = Book.includes(:favorited_users).sort {|a,b| b.favorited_users.size <=> a.favorited_users.size }
-
-    @today_book =  @books.created_today
-    @yesterday_book = @books.created_yesterday
-    @this_week_book = @books.created_this_week
-    @last_week_book = @books.created_last_week
-  end
-
   def index
     @user = User.new
     @users = User.all
     @book = Book.new
     @user = current_user
+  end
+
+  def show
+    @user = User.find(params[:id])
+    @books = @user.books
+    @book = Book.new
+    @books = @user.books.includes(:favorited_users).sort {|a,b| b.favorited_users.size <=> a.favorited_users.size }
+
   end
 
   def edit

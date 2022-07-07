@@ -20,6 +20,14 @@ class Book < ApplicationRecord
 
   has_many :book_comments, dependent: :destroy
 
+  has_many :view_counts, dependent: :destroy
+
+
+
+  is_impressionable counter_cache: true
+
+
+
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
   end
