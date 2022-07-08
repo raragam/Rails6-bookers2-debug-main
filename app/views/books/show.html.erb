@@ -38,7 +38,7 @@
             <%= link_to "コメント数: #{@book.book_comments.count}", book_path(@book.id) %>
           </td>
           <td>
-            <p class="view-count">閲覧数: <%= @book_detail.view_counts.count %></p>
+            <p>閲覧数: <%= @book.impressions_count %></p>
           </td>
 
         </tr>
