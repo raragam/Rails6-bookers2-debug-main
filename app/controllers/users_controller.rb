@@ -11,9 +11,21 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @books = @user.books
-    @book = Book.new
+
+    @today_book = @books.created_today
+    @yesterday_book = @books.created_yesterday
+    @this_week_book = @books.created_this_week
+    @last_week_book = @books.created_last_week
+
+    @six_day_book = @books.created_6days
+    @five_day_book = @books.created_5days
+    @four_day_book = @books.created_4days
+    @three_day_book = @books.created_3days
+    @two_day_book = @books.created_2days
+
     @books = @user.books.includes(:favorited_users).sort {|a,b| b.favorited_users.size <=> a.favorited_users.size }
 
+    @book = Book.new
   end
 
   def edit

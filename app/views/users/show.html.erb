@@ -26,10 +26,117 @@
     </tr>
   </thead>
 
+  <tbody>
+    <tr>
+      <td>
+        <%= @today_book.count %>
+      </td>
+      <td>
+        <%= @yesterday_book.count %>
+      </td>
+      <td>
+        <% if @yesterday_book.count == 0 %>
+        前日の投稿はありません
+        <% else %>
+        <% @the_day_before = @today_book.count / @yesterday_book.count.to_f  %>
+        <%= (@the_day_before * 100).round %>
+        %
+        <% end %>
+      </td>
+    </tr>
+  </tbody>
+  </table>
 
+  <table class='table table-hover table-inverse'>
+  <thead>
+    <tr>
+      <th>今週の投稿数</th>
+      <th>前週の投稿数</th>
+      <th>前週比</th>
+    </tr>
+  </thead>
 
-    </div>
+  <tbody>
+    <tr>
+     <td>
+       <%= @this_week_book.count %>
+       </td>
+     <td>
+       <%= @last_week_book.count %>
+       </td>
+     <td>
+       <% if @last_week_book.count == 0 %>
+       先週の投稿はありません
+       <% else %>
+
+    　  <% @the_week_before =   @this_week_book.count / @last_week_book.count.to_f  %>
+    　  <%= (@the_week_before * 100).round %>
+       %
+     </td>
+       <% end %>
+     </tr>
+  </tbody>
+  </table>
+
+  <table class="table">
+   <thead>
+    <tr>
+     <th>６日前</th>
+     <th>５日前</th>
+     <th>４日前</th>
+     <th>３日前</th>
+     <th>２日前</th>
+     <th>１日前</th>
+     <th>今日</th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+      <th>
+       <%= @six_day_book.count %>
+      </th>
+     <th>
+       <%= @five_day_book.count %>
+       </th>
+     <th>
+       <%= @four_day_book.count %>
+       </th>
+     <th>
+       <%= @three_day_book.count %>
+       </th>
+     <th>
+       <%= @two_day_book.count %>
+       </th>
+     <th>
+       <%= @yesterday_book.count %>
+       </th>
+     <th>
+       <%= @today_book.count %>
+       </th>
+    </tr>
+   </tbody>
+  </table>
+
+  <canvas id="myChart" width="300" height="100"> </canvas>
+
+    <script>
+    var ctx = document.getElementById("myChart").getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['6日前', '5日前', '4日前', '3日前', '2日前', '1日前', '今日'],
+            datasets: [{
+                label: "投稿数",
+                data: [<%= @six_day_book.count %>, <%= @five_day_book.created_5days.count %>, <%= @four_day_book.created_4days.count %>, <%= @three_day_book.created_3days.count %>, <%= @two_day_book.created_2days.count %>, <%= @yesterday_book.count %>, <%= @today_book.count%>],
+                backgroundColor: 'rgba(255, 80, 120, 1.0)',
+                borderColor: 'rgba(255, 80, 120, 1.0)',
+                fill: false
+            }]
+        },
+    });
+</script>
+
+  </div>
   </div>
 </div>
-</table>
 
