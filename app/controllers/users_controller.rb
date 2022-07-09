@@ -11,6 +11,16 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @books = @user.books
+    @book = Book.new
+
+    if params[:created_at] == ""
+       @search_book = "日付を選択してください"
+
+    else
+       create_at = params[:created_at]
+       @search_book = @books.where(['created_at LIKE ? ', "#{create_at}%"]).count
+
+    end
 
     @today_book = @books.created_today
     @yesterday_book = @books.created_yesterday
@@ -25,7 +35,6 @@ class UsersController < ApplicationController
 
     @books = @user.books.includes(:favorited_users).sort {|a,b| b.favorited_users.size <=> a.favorited_users.size }
 
-    @book = Book.new
   end
 
   def edit
