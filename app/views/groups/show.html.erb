@@ -45,7 +45,11 @@
             <% end %>
           </td>
           <td>
+            <% if @group.owner_id == current_user.id %>
             <%= link_to 'Notice an Event', group_new_mail_path(@group), class: "btn btn-sm btn-primary" %>
+            <% else %>
+            <%= link_to 'オーナーから送信されたメール', group_owner_mail_path(@group.id), class: "btn btn-sm btn-primary" %>
+            <% end %>
           </td>
         </tr>
 
